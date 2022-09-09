@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import cardType from '../../model/types/cardType';
-import Card from './Card';
+import PropTypes from "prop-types";
+import cardType from "../model/cardType";
+import Card from "./Card";
 
 const Cards = ({ cards, onDelete }) => {
     if (!cards.length) return null;

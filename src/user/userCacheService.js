@@ -1,6 +1,6 @@
 import JwtDecode from "jwt-decode";
 
-const localStorageService = () => {
+const userCacheService = () => {
   const USER_KEY = "token";
   const getUser = () => {
     try {
@@ -15,10 +15,10 @@ const localStorageService = () => {
     localStorage.removeItem(USER_KEY);
   };
 
-  const updateUser = user => {
+  const updateUser = (user) => {
     localStorage.setItem(USER_KEY, user);
   };
   return { getUser, removeUser, updateUser };
 };
 
-export default localStorageService;
+export default userCacheService;

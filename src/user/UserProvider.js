@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+ useCallback, useEffect, useMemo, useState,
+} from "react";
 import { node } from "prop-types";
 import useUserEndpoints from "./useUserEndpoint";
-import localStorageService from "../services/localStorageService";
+import localStorageService from "./userCacheService";
 
 const UserContext = React.createContext(undefined);
 
@@ -11,7 +13,7 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (!user) {
-      const localStorageUser = localStorageService.getUser();
+      const localStorageUser = localStorageService().getUser();
       setUser(localStorageUser);
     }
   }, [user]);
@@ -22,22 +24,22 @@ const UserProvider = ({ children }) => {
   }, []);
 
   const login = useCallback(
-    async loginUser => {
+    async (loginUser) => {
       const {
         data: { token },
       } = await loginApi(loginUser);
       setUser(loginUser);
       localStorageService.updateUser(token);
     },
-    [loginApi]
+    [loginApi],
   );
 
   const register = useCallback(
-    async registerUser => {
+    async (registerUser) => {
       await signupApi(registerUser);
       return login(registerUser);
     },
-    [signupApi]
+    [login, signupApi],
   );
 
   const value = useMemo(
@@ -47,7 +49,7 @@ const UserProvider = ({ children }) => {
       register,
       logout,
     }),
-    [user, login, register, logout]
+    [user, login, register, logout],
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

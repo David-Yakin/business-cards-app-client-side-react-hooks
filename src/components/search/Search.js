@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const Search = ({ onSearch, placeholder, initialSearchTerm }) => {
     const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
@@ -37,8 +37,8 @@ Search.propTypes = {
 };
 
 Search.defaultProps = {
-    placeholder: 'Search...',
-    initialSearchTerm: '',
+    placeholder: "Search...",
+    initialSearchTerm: "",
 };
 
 export default Search;

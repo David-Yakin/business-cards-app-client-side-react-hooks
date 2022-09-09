@@ -1,42 +1,43 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "indent": "off",
+    "react/jsx-indent": ["error", 4],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.stories.js", "**/*.test.js", "**/*.spec.js"] }
     ],
-    "rules": {
-        "react/function-component-definition": ["error", {
-            "namedComponents": "arrow-function",
-            "unnamedComponents": "arrow-function"
-        }
-        ],
-        "react/react-in-jsx-scope": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "indent": "off",
-        "react/jsx-indent": ["error", 4],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.stories.js", "**/*.test.js", "**/*.spec.js"]}],
-        "no-underscore-dangle": "off"
-    },
-    "overrides": [
-        {
-            "files": ["**/*.stories.js"],
-            "rules": {
-                "import/no-extraneous-dependencies": "off",
-                "react/jsx-props-no-spreading": "off"
-            }
-        }
-    ]
+    "no-underscore-dangle": "off",
+    "quotes": [2, "double", { "avoidEscape": true }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "react/jsx-props-no-spreading": "off"
+      }
+    }
+  ]
 }

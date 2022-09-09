@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Input from '../controls/Input';
+import React from "react";
+import PropTypes from "prop-types";
+import Input from "../components/controls/Input";
 
 const InputField = ({
  name, label, type, value, onChange, error,
@@ -22,11 +22,11 @@ InputField.propTypes = {
     label: PropTypes.string.isRequired,
     error: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    type: PropTypes.oneOf(['text', 'email', 'password']),
+    type: PropTypes.oneOf(["text", "email", "password"]),
 };
 
 InputField.defaultProps = {
-    type: 'text',
+    type: "text",
     error: null,
 };
 

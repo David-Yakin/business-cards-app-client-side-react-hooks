@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import cardType from '../../model/types/cardType';
+import PropTypes from "prop-types";
+import cardType from "../model/cardType";
 
 const Card = ({ card, onDelete }) => {
     const {
@@ -39,7 +39,7 @@ const Card = ({ card, onDelete }) => {
                     <div>
                         <span className="cursor" onClick={onDelete} onKeyDown={onDelete} role="button" tabIndex="0">
                             Delete |
-                            {' '}
+                            {" "}
                         </span>
                         <span className="cursor">Edit</span>
                     </div>

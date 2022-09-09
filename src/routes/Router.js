@@ -1,13 +1,13 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import HomePage from '../pages/home/HomePage';
-import SignupPage from '../pages/signup/SignupPage';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import CardsPage from "../cards/CardsPage";
+import SignupPage from "../user/signup/SignupPage";
 
-const BCRoutes = () => (
+const Router = () => (
     <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<CardsPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route path="*" element={<CardsPage />} />
         {/* <Route path="/about" element={<About />} />
             <Route path="/biz-signup" element={<BizSignup />} />
             <Route path="/logout" element={<Logout />} />
@@ -20,6 +20,6 @@ const BCRoutes = () => (
     </Routes>
 );
 
-BCRoutes.propTypes = {};
+Router.propTypes = {};
 
-export default BCRoutes;
+export default Router;

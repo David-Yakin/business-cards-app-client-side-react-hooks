@@ -1,4 +1,4 @@
-import Chance from 'chance';
+import Chance from "chance";
 
 const chance = new Chance(312);
 
@@ -10,7 +10,7 @@ const generateCard = () => ({
     bizNumber: chance.integer({ min: 1_000_000, max: 9_999_999 }),
     phone: chance.phone(),
     image: {
-        url: chance.avatar({ protocol: 'https' }),
+        url: chance.avatar({ protocol: "https" }),
         alt: chance.word(),
     },
 });

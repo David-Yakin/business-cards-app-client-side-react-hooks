@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const Button = ({ disabled, label, type }) => (
     <button
@@ -15,12 +15,12 @@ const Button = ({ disabled, label, type }) => (
 Button.propTypes = {
     disabled: PropTypes.bool,
     label: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['button', 'submit', 'reset']),
+    type: PropTypes.oneOf(["button", "submit", "reset"]),
 };
 
 Button.defaultProps = {
     disabled: false,
-    type: 'button',
+    type: "button",
 };
 
 export default Button;

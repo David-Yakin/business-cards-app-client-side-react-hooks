@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import { useState } from "react";
 import Joi from "joi-browser";
 import PropTypes from "prop-types";
@@ -12,7 +13,9 @@ const validateField = ({ name, value, schema }) => {
   return error ? error.details[0].message : null;
 };
 
-const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
+const useForm = ({
+ emptyForm, schema, validationOptions, onSubmit,
+}) => {
   const [data, setData] = useState(emptyForm);
   const [errors, setErrors] = useState({});
 
@@ -20,13 +23,13 @@ const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
     const { error } = Joi.validate(
       data,
       schema,
-      validationOptions || DEFAULT_OPTIONS
+      validationOptions || DEFAULT_OPTIONS,
     );
 
     if (!error) return null;
 
     const validationResults = {};
-    error.details.forEach(errorEntry => {
+    error.details.forEach((errorEntry) => {
       validationResults[errorEntry.path[0]] = errorEntry.message;
     });
     return validationResults;
@@ -35,17 +38,17 @@ const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
   const handleChange = ({ target }) => {
     const { name, value } = target;
     const errorMessage = validateField({ name, value, schema });
-    setErrors(prev => ({
+    setErrors((prev) => ({
       ...prev,
       [name]: errorMessage,
     }));
-    setData(prev => ({
+    setData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors || {});

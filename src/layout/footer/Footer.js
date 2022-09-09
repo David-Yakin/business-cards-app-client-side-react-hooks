@@ -1,7 +1,7 @@
 const Footer = () => (
     <p className="border-top pt-3 text-center bg-light">
         Created by David Yakin &copy;
-        {' '}
+        {" "}
         {new Date().getFullYear()}
     </p>
     );

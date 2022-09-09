@@ -1,6 +1,6 @@
 import {
  number, oneOfType, shape, string,
-} from 'prop-types';
+} from "prop-types";
 
 const cardType = shape({
     _id: string,
