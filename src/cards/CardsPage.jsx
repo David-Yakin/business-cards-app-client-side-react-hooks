@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import PageHeader from "../component/PageHeader";
-import Cards from "../../componenets/cards/Cards";
-import useCards from "../../hooks/useCards";
-import { generateCards } from "../../fixture/cardsFixture";
-import Search from "../../componenets/search/Search";
+import { useEffect, useState } from "react";
+import Cards from "./components/Cards";
+import Search from "../componenets/search/Search";
+import { generateCards } from "./_mock/cardsFixture";
+import useCards from "./useCards";
+import PageHeader from "../pages/PageHeader";
 
-const HomePage = () => {
+const CardsPage = () => {
   const { cards, handleDelete } = useCards(generateCards(6));
   const [searchTerm, setSearchTerm] = useState("");
   const [cardsToShow, setCardsToShow] = useState(cards);
@@ -29,4 +29,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default CardsPage;

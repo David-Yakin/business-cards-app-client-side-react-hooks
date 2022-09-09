@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { node } from "prop-types";
 import useUserEndpoints from "./useUserEndpoint";
-import localStorageService from "../services/localStorageService";
+import userCacheService from "./userCacheService";
 
 const UserContext = React.createContext(undefined);
 
@@ -11,13 +11,13 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (!user) {
-      const localStorageUser = localStorageService.getUser();
+      const localStorageUser = userCacheService().getUser();
       setUser(localStorageUser);
     }
   }, [user]);
 
   const logout = useCallback(() => {
-    localStorageService.removeUser();
+    userCacheService.removeUser();
     setUser(null);
   }, []);
 
@@ -27,7 +27,7 @@ const UserProvider = ({ children }) => {
         data: { token },
       } = await loginApi(loginUser);
       setUser(loginUser);
-      localStorageService.updateUser(token);
+      userCacheService.updateUser(token);
     },
     [loginApi]
   );
@@ -37,7 +37,7 @@ const UserProvider = ({ children }) => {
       await signupApi(registerUser);
       return login(registerUser);
     },
-    [signupApi]
+    [signupApi, login]
   );
 
   const value = useMemo(

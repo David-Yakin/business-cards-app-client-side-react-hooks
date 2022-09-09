@@ -1,11 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
-import PageHeader from "../component/PageHeader";
-import InputField from "../../componenets/form/InputField";
+import { useUser } from "../UserProvider";
+import PageHeader from "../../pages/PageHeader";
+import useForm from "./../../form/useForm";
+import InputField from "../../form/InputField";
 import Button from "../../componenets/controls/Button";
-import { useUser } from "../../user/UserProvider";
-import useForm from "../../hooks/useForm";
 
 const EMPTY_FORM = {
   name: "",

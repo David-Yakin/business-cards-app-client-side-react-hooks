@@ -63,8 +63,11 @@ const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
 };
 
 useForm.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   emptyForm: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   schema: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.object.isRequired,
   onSubmit: PropTypes.func,
 };
