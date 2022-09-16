@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useCardsEndpoints from "./useCardsEndpoints";
 
-const useCards = (initialState) => {
-    const [cards, setCards] = useState(initialState);
+const useCards = () => {
+  const [cards, setCards] = useState([]);
+  const { getCards } = useCardsEndpoints();
 
-    // eslint-disable-next-line max-len
-    const handleDelete = (id) => setCards((currentCards) => currentCards.filter((card) => card._id !== id));
+  // eslint-disable-next-line max-len
+  const handleDelete = (id) => setCards((currentCards) => currentCards.filter((card) => card._id !== id));
 
-    return {
-        cards,
-        handleDelete,
-    };
+  useEffect(() => {
+    getCards()
+      .then(setCards)
+      .catch((e) => {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      });
+  }, [getCards]);
+
+  return {
+    cards,
+    handleDelete,
+  };
 };
 
 export default useCards;
