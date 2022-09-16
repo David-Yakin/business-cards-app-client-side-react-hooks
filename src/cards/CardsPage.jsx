@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import Cards from "./components/Cards";
 import Search from "../componenets/search/Search";
-import { generateCards } from "./_mock/cardsFixture";
 import useCards from "./useCards";
 import PageHeader from "../pages/PageHeader";
 
 const CardsPage = () => {
-  const { cards, handleDelete } = useCards(generateCards(6));
+  const { cards, handleDelete } = useCards();
   const [searchTerm, setSearchTerm] = useState("");
   const [cardsToShow, setCardsToShow] = useState(cards);
 
