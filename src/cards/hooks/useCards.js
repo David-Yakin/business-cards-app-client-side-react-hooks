@@ -12,7 +12,6 @@ const useCards = () => {
   useEffect(() => {
     getCards()
       .then(setCards)
-      // .then((data)=>setCards(data))
       .catch(e => {
         // eslint-disable-next-line no-console
         console.error(e);

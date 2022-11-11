@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import Cards from "./components/Cards";
-import Search from "../componenets/search/Search";
-import useCards from "./useCards";
-import PageHeader from "../pages/PageHeader";
+import Cards from "../components/Cards";
+import Search from "../../componenets/search/Search";
+import useCards from "../hooks/useCards";
+import PageHeader from "../../componenets/PageHeader";
+import { noop } from "bootstrap/js/src/util";
+import { CreateCard } from "./CreateCard";
 
 const CardsPage = () => {
   const { cards, handleDelete } = useCards();
@@ -22,8 +24,9 @@ const CardsPage = () => {
         title="Business Card App"
         subTitle="Here you will find business cards"
       />
+      <CreateCard />
       <Search onSearch={setSearchTerm} placeholder="Search Cards..." />
-      <Cards cards={cardsToShow} onDelete={handleDelete} />
+      <Cards cards={cardsToShow} onDelete={handleDelete || noop} />
     </div>
   );
 };

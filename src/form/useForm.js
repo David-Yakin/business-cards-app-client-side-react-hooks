@@ -1,15 +1,34 @@
 import { useState } from "react";
-import Joi from "joi-browser";
+import Joi from "joi";
 import PropTypes from "prop-types";
 import { noop } from "bootstrap/js/src/util";
 
 const DEFAULT_OPTIONS = { abortEarly: false };
 
-const validateField = ({ name, value, schema }) => {
-  const obj = { [name]: value };
-  const fieldSchema = { [name]: schema[name] };
-  const { error } = Joi.validate(obj, fieldSchema);
-  return error ? error.details[0].message : null;
+const extractKeys = name => {
+  const keys = name.split(".");
+  let nestedKey = keys.length === 2 ? keys[1] : null;
+  const key = keys[0];
+  return { key, nestedKey };
+};
+
+const validateField = ({ data, name, value, schema }) => {
+  console.log({ name, value, Joi });
+  const { key, nestedKey } = extractKeys(name);
+  let obj = { ...data, [name]: value };
+  let path = [key];
+  if (nestedKey) {
+    obj = { ...data, [key]: { ...data[key], [nestedKey]: value } };
+    path = [...path, nestedKey];
+  }
+
+  const { error } = schema.validate(obj, { abortEarly: false });
+  console.log({ obj, error });
+  const fieldErrors = error.details.filter(
+    error => JSON.stringify(error.path) === JSON.stringify(path)
+  );
+  console.log({ fieldErrors });
+  return error ? fieldErrors[0]?.message : null;
 };
 
 const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
@@ -17,6 +36,7 @@ const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
   const [errors, setErrors] = useState({});
 
   const validate = () => {
+    console.log(data);
     const { error } = Joi.validate(
       data,
       schema,
@@ -32,16 +52,34 @@ const useForm = ({ emptyForm, schema, validationOptions, onSubmit }) => {
     return validationResults;
   };
 
+  //  const keyLensPath = name.split(".")
+  //  R.set(keyLensPath, value, data)
+
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    const errorMessage = validateField({ name, value, schema });
+
+    console.log({ target });
+    const errorMessage = validateField({ data, name, value, schema });
+    console.log({ errorMessage });
+    const { key, nestedKey } = extractKeys(name);
+    if (nestedKey) {
+      setErrors(prev => ({
+        ...prev,
+        [key]: { ...prev[key], [nestedKey]: errorMessage },
+      }));
+      setData(prev => ({
+        ...prev,
+        [key]: { ...prev[key], [nestedKey]: value },
+      }));
+      return;
+    }
     setErrors(prev => ({
       ...prev,
-      [name]: errorMessage,
+      [key]: errorMessage,
     }));
     setData(prev => ({
       ...prev,
-      [name]: value,
+      [key]: value,
     }));
   };
 

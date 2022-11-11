@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import { useUser } from "../UserProvider";
-import PageHeader from "../../pages/PageHeader";
+import PageHeader from "../../componenets/PageHeader";
 import useForm from "./../../form/useForm";
 import InputField from "../../form/InputField";
 import Button from "../../componenets/controls/Button";

@@ -18,7 +18,7 @@ const EnvironmentContext = React.createContext({
 // const { Provider } = EnvironmentContext;
 
 const defaultEnv = {
-  apiUrl: process.env.REACT_APP_API_URL || "http://localhost:8181/api",
+  apiUrl: process.env.REACT_APP_API_URL || "http://localhost:8181/",
   isTest: false,
 };
 

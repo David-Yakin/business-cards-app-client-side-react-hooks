@@ -1,55 +1,40 @@
+import * as React from "react";
 import PropTypes from "prop-types";
-import cardType from "../model/cardType";
+import MuiCard from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { CardActionArea, Divider } from "@mui/material";
+import cardType from "./../model/cardType";
+import CardTitle from "./CardTitle";
+import CardFields from "./CardFields";
 
 const Card = ({ card, onDelete }) => {
   const {
     title,
-    description,
-    address,
+    subtitle,
     image: { url, alt },
-    bizNumber,
-    phone,
   } = card;
 
   return (
-    <div className="col-12 col-md-6 col-lg-4 col-xl-3 mt-3">
-      <div className="card px-0">
-        <div className="card-head">
-          <img className="img-fluid" src={url} alt={alt} />
-          <div className="p-2">
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
-            <hr className="m-0" />
-          </div>
-        </div>
-        <div className="card-body p-2">
-          <div>
-            <strong>Tel: </strong>
-            {phone}
-          </div>
-          <div>
-            <strong>Address: </strong>
-            {address}
-          </div>
-          <div>
-            <strong>Card Number: </strong>
-            {bizNumber}
-          </div>
-
-          <div>
-            <span
-              className="cursor"
-              onClick={onDelete}
-              onKeyDown={onDelete}
-              role="button"
-              tabIndex="0">
-              Delete |{" "}
-            </span>
-            <span className="cursor">Edit</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <MuiCard sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardMedia component="img" height="194" image={url} alt={alt} />
+        <CardContent sx={{ paddingBottom: 0 }}>
+          <CardTitle title={title} subtitle={subtitle} />
+          <Divider />
+          <CardFields card={card} />
+        </CardContent>
+      </CardActionArea>
+      <CardActions disableSpacing sx={{ paddingTop: 0, justifyContent: "end" }}>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+      </CardActions>
+    </MuiCard>
   );
 };
 

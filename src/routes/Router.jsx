@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import SignupPage from "../users/signup/SignupPage";
-import CardsPage from "../cards/CardsPage";
+import CardsPage from "../cards/pages/CardsPage";
 
 const Router = () => (
   <Routes>
